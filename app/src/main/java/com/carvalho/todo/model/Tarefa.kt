@@ -1,12 +1,13 @@
 package com.carvalho.todo.model
 
 data class Tarefa(
-    var titulo: String,
+    val id: Long,
+    var nome: String,
     var descricao: String,
     var responsavel: String,
     var data: String,
-    var andamento: Boolean,
-    var categoria: String
+    var status: Boolean,
+    var categoria: Categoria
 ) {
 
 }

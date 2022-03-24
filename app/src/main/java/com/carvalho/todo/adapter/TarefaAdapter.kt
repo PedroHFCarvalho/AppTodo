@@ -20,26 +20,27 @@ class TarefaAdapter : RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>() {
         return TarefaViewHolder(layout)
     }
 
-    // Exibe na tela o modelo criado com os dados recuberados
+    // Exibe na tela o modelo criado com os dados recuperados
     override fun onBindViewHolder(holder: TarefaViewHolder, position: Int) {
 
         val tarefa = listTarefa[position]
 
-        holder.txtTitulo.text = tarefa.titulo
+        holder.txtTitulo.text = tarefa.nome
         holder.txtDescricao.text = tarefa.descricao
         holder.txtResponsavel.text = tarefa.responsavel
         holder.txtData.text = tarefa.data
-        holder.swtAndamento.isChecked = tarefa.andamento
-        holder.txtCategoria.text = tarefa.categoria
+        holder.swtAndamento.isChecked = tarefa.status
+        holder.txtCategoria.text = tarefa.categoria.descricao
 
     }
-    // conta quantos item existem na lista
+
+    // Conta quantos itens existem na lista
     override fun getItemCount(): Int {
         return listTarefa.size
     }
 
-    //mapeia na tela item a serem alterados
-    inner class TarefaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    // Mapeia na tela item a serem alterados
+    class TarefaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val txtTitulo = view.findViewById<TextView>(R.id.txtTitulo)
         val txtDescricao = view.findViewById<TextView>(R.id.txtDescricao)
@@ -49,7 +50,8 @@ class TarefaAdapter : RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>() {
         val txtCategoria = view.findViewById<TextView>(R.id.txtCategoria)
 
     }
-    // traz a lista de item complera
+
+    // Traz a lista de item completa
     fun setLista(list: List<Tarefa>) {
         listTarefa = list
         notifyDataSetChanged()
