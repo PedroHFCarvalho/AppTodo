@@ -8,9 +8,17 @@
         <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/Todo/app/src/main/res/layout/cardview_tarefas.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/Todo/app/src/main/res/layout/fragment_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/Todo/app/src/main/res/layout/tarefa.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/app/src/main/res/layout/cardview_tarefas.xml" value="0.1" />
-        <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/app/src/main/res/layout/fragment_form.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1515" />
+        <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/app/src/main/res/drawable/ic_baseline_event_note_24.xml" value="0.215" />
+        <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/app/src/main/res/drawable/ic_baseline_note_alt_24.xml" value="0.2545" />
+        <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/app/src/main/res/drawable/ic_outline_event_note_24.xml" value="0.215" />
+        <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/app/src/main/res/drawable/note_black.xml" value="0.215" />
+        <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/app/src/main/res/drawable/note_white.xml" value="0.215" />
+        <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/app/src/main/res/layout/cardview_tarefas.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/app/src/main/res/layout/fragment_form.xml" value="0.25" />
         <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/app/src/main/res/layout/fragment_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Pedro-PC/Desktop/AppTodo/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.209" />
         <entry key="..\:/Users/Pedro-PC/Desktop/Projetos_Android/Todo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2575" />
         <entry key="..\:/Users/Pedro-PC/Desktop/Projetos_Android/Todo/app/src/main/res/layout/activity_main.xml" value="0.33" />
       </map>
@@ -21,5 +29,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.40319258496395466" />
+      </ProjectState>
+    </option>
   </component>
 </project>

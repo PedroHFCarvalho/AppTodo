@@ -7,12 +7,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.carvalho.todo.model.Categoria
 import com.carvalho.todo.repository.Repository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
+import javax.inject.Inject
 
+
+
+//@Inject injeta a dependencia na classe
+//@HiltViewModel prepara a viewMOdel para receber uma dependencia
+@HiltViewModel
 // Passar para viewModel o Repository
-class MainViewModel(private val repository: Repository) : ViewModel() {
+class MainViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     // Atributo que recebe o resultado do método GET
     private var _responseCategoria = MutableLiveData<Response<List<Categoria>>>()
