@@ -68,7 +68,8 @@
             android:contentDescription="@string/deletar"
             android:minHeight="48dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_baseline_clear_24" />
+            app:srcCompat="@drawable/ic_baseline_clear_24"
+            tools:ignore="ImageContrastCheck" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
