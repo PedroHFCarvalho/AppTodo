@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.carvalho.todo.model.Categoria
+import com.carvalho.todo.model.Tarefa
 import com.carvalho.todo.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -22,12 +23,15 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
 
     // Atributo que recebe o resultado do método GET
     private var _responseCategoria = MutableLiveData<Response<List<Categoria>>>()
+    private var _responseTarefa = MutableLiveData<Response<List<Tarefa>>>()
 
     // Cria um atributo para receber uma data
     val dataSelecionada = MutableLiveData<LocalDate>()
 
     // Recebe os dados da _responseCategoria disponibilizando o método para fora da classe com a possibilidade de alteração
     val responseCategoria: LiveData<Response<List<Categoria>>> = _responseCategoria
+    val responseTarefa: LiveData<Response<List<Tarefa>>> = _responseTarefa
+
 
     init {
         // Atribui ao atributo dataSelecionada a data atual
@@ -44,11 +48,36 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
                 val response = repository.listaCategoria()
                 _responseCategoria.value = response
             } catch (e: Exception) {
-                Log.d("Erro", e.message.toString())
+                Log.d("Erro de Listagem", e.message.toString())
             }
 
         }
 
+    }
+    fun listaTarefa() {
+        // viewModelScope.lauch executa o bloco do codigo de forma assíncrona
+        viewModelScope.launch {
+            try {
+                val response = repository.listaTarefas()
+                _responseTarefa.value = response
+            } catch (e: Exception) {
+                Log.d("Erro de Listagem", e.message.toString())
+            }
+
+        }
+
+    }
+
+    // Método que recebera e mandara os dados
+    fun addTarefa(tarefa: Tarefa) {
+        viewModelScope.launch {
+            try {
+                repository.addTarefa(tarefa)
+                listaTarefa()
+            } catch (e: Exception) {
+                Log.d("Erro de Adição", e.message.toString())
+            }
+        }
     }
 
 }

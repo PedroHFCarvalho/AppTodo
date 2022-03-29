@@ -15,6 +15,7 @@ import com.carvalho.todo.databinding.FragmentListBinding
 class ListFragment : Fragment() {
 
     private lateinit var binding: FragmentListBinding
+    val tarefaAdapter = TarefaAdapter()
     private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -24,15 +25,22 @@ class ListFragment : Fragment() {
         // Instância do binding
         binding = FragmentListBinding.inflate(layoutInflater, container, false)
 
-
+        viewModel.listaTarefa()
         viewModel.listaCategoria()
+
+        viewModel.responseTarefa.observe(viewLifecycleOwner){ reponse ->
+            if (reponse != null){
+                tarefaAdapter.setLista(reponse.body()!!)
+            }
+        }
+
         viewModel.responseCategoria.observe(viewLifecycleOwner) { response ->
             Log.d("Requisicao", response.body().toString())
         }
 
 
         // Instância do adapter criado
-        val tarefaAdapter = TarefaAdapter()
+
 
         // Configura modo de exibição do recycler
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
