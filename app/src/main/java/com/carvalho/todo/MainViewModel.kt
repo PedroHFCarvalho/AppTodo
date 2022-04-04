@@ -32,6 +32,8 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
     val responseCategoria: LiveData<Response<List<Categoria>>> = _responseCategoria
     val responseTarefa: LiveData<Response<List<Tarefa>>> = _responseTarefa
 
+    // Atributo que ira controlar se o usuario esta criando ou atualizando uma tarefa
+    var tarefaSelec: Tarefa? = null
 
     init {
         // Atribui ao atributo dataSelecionada a data atual
@@ -68,7 +70,7 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
 
     }
 
-    // Método que recebera e mandara os dados
+    // Método que recebera e mandara os dados para a adição de tarefa
     fun addTarefa(tarefa: Tarefa) {
         viewModelScope.launch {
             try {
@@ -76,6 +78,18 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
                 listaTarefa()
             } catch (e: Exception) {
                 Log.d("Erro de Adição", e.message.toString())
+            }
+        }
+    }
+
+    // Método que recebera e mandara os dados para a atualização de tarefa
+    fun updateTarefa(tarefa: Tarefa){
+        viewModelScope.launch {
+            try {
+                repository.updateTarefa(tarefa)
+                listaTarefa()
+            }catch (e: Exception){
+                Log.d("Erro de Atualização", e.message.toString())
             }
         }
     }

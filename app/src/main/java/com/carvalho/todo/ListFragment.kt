@@ -10,13 +10,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.carvalho.todo.adapter.TarefaAdapter
+import com.carvalho.todo.adapter.TaskItemClickListener
 import com.carvalho.todo.databinding.FragmentListBinding
+import com.carvalho.todo.model.Tarefa
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), TaskItemClickListener {
 
     private lateinit var binding: FragmentListBinding
-    val tarefaAdapter = TarefaAdapter()
     private val viewModel: MainViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,9 +29,10 @@ class ListFragment : Fragment() {
 
         viewModel.listaTarefa()
         viewModel.listaCategoria()
+        val tarefaAdapter = TarefaAdapter(this, viewModel)
 
-        viewModel.responseTarefa.observe(viewLifecycleOwner){ reponse ->
-            if (reponse != null){
+        viewModel.responseTarefa.observe(viewLifecycleOwner) { reponse ->
+            if (reponse != null) {
                 tarefaAdapter.setLista(reponse.body()!!)
             }
         }
@@ -54,11 +57,18 @@ class ListFragment : Fragment() {
 
         // Pega o Evento de click do componente
         binding.floatingAdd.setOnClickListener {
+            viewModel.tarefaSelec = null
             findNavController().navigate(R.id.action_listFragment_to_formFragment)
         }
 
 
         return binding.root
+    }
+
+    // Metodo ira resgatar a tarefa selecionada
+    override fun onTaskClicked(tarefa: Tarefa) {
+        viewModel.tarefaSelec = tarefa
+        findNavController().navigate(R.id.action_listFragment_to_formFragment)
     }
 
 }

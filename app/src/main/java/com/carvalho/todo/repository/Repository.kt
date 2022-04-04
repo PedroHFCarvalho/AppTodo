@@ -20,5 +20,10 @@ class Repository {
     suspend fun listaTarefas(): Response<List<Tarefa>> {
         return RetrofitInstance.api.listaTarefas()
     }
+    // Método que acessa a API através do RetrofitInstance e chama o PUT da ApiService
+    suspend fun updateTarefa(tarefa: Tarefa): Response<Tarefa>{
+        return RetrofitInstance.api.updateTarefa(tarefa)
+    }
+
 
 }

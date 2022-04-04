@@ -25,6 +25,7 @@ class FormFragment : Fragment(), DatePickerFragment.TimePickerListener {
     private lateinit var binding: FragmentFormBinding
     private val viewModel: MainViewModel by activityViewModels()
     private var categoriaSelc = 0L
+    private var tarefaSelec: Tarefa? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +33,7 @@ class FormFragment : Fragment(), DatePickerFragment.TimePickerListener {
     ): View? {
 
         binding = FragmentFormBinding.inflate(layoutInflater, container, false)
+        carregarDados()
         viewModel.listaTarefa()
 
         viewModel.responseCategoria.observe(viewLifecycleOwner) { response ->
@@ -72,6 +74,7 @@ class FormFragment : Fragment(), DatePickerFragment.TimePickerListener {
                         val categoriaSelcFun = binding.spinnerCategoria.selectedItem as Categoria
                         categoriaSelc = categoriaSelcFun.id
                     }
+
                     override fun onNothingSelected(p0: AdapterView<*>?) {
                         TODO("Not yet implemented")
                     }
@@ -82,7 +85,8 @@ class FormFragment : Fragment(), DatePickerFragment.TimePickerListener {
         }
     }
 
-    override fun onTimeSelected(date: LocalDate) { // Método que coloca a data selecionada no textEdit
+    // Método que coloca a data selecionada no textEdit
+    override fun onTimeSelected(date: LocalDate) {
         viewModel.dataSelecionada.value = date
     }
 
@@ -103,9 +107,15 @@ class FormFragment : Fragment(), DatePickerFragment.TimePickerListener {
         val status = binding.switchAndamento.isChecked
         val categoria = Categoria(categoriaSelc, null, null)
 
-        if (validaCampos(nome, desc, responsavel, data)) {
-            val terefa = Tarefa(0, nome, desc, responsavel, data, status, categoria)
-            viewModel.addTarefa(terefa)
+        if (validaCampos(nome, desc, responsavel, data)) { //Caso o usuario queira adicionar
+            if (tarefaSelec == null) {
+                val terefa = Tarefa(0, nome, desc, responsavel, data, status, categoria)
+                viewModel.addTarefa(terefa)
+            } else { // Caso o Usuario queira Atualizar
+                val tarefa =
+                    Tarefa(tarefaSelec?.id!!, nome, desc, responsavel, data, status, categoria)
+                viewModel.updateTarefa(tarefa)
+            }
             Toast.makeText(context, "Tarefa Salva", Toast.LENGTH_LONG).show()
             findNavController().navigate(com.carvalho.todo.R.id.action_formFragment_to_listFragment)
 
@@ -114,5 +124,23 @@ class FormFragment : Fragment(), DatePickerFragment.TimePickerListener {
         }
     }
 
+    //Carrega dos dados para o formulario
+    private fun carregarDados() {
+        tarefaSelec = viewModel.tarefaSelec
+        if (tarefaSelec != null) {
+            binding.editNome.setText(tarefaSelec?.nome)
+            binding.editDescricao.setText(tarefaSelec?.descricao)
+            binding.editResponsavel.setText(tarefaSelec?.responsavel)
+            binding.editData.setText(tarefaSelec?.data)
+            binding.switchAndamento.isChecked = tarefaSelec?.status!!
+        } else {
+            binding.editNome.text = null
+            binding.editDescricao.text = null
+            binding.editResponsavel.text = null
+            binding.editData.text = null
+        }
+
+
+    }
 
 }

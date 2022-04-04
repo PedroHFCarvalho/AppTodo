@@ -6,10 +6,14 @@ import android.view.ViewGroup
 import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.carvalho.todo.MainViewModel
 import com.carvalho.todo.R
 import com.carvalho.todo.model.Tarefa
 
-class TarefaAdapter : RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>() {
+class TarefaAdapter(
+    private val taskItemClickListener: TaskItemClickListener,
+    private val viewModel: MainViewModel
+) : RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>() {
 
     private var listTarefa = emptyList<Tarefa>()
 
@@ -32,6 +36,17 @@ class TarefaAdapter : RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>() {
         holder.swtAndamento.isChecked = tarefa.status
         holder.txtCategoria.text = tarefa.categoria.descricao
 
+        // Evendo que identifica um click emcima do card
+        holder.itemView.setOnClickListener {
+            taskItemClickListener.onTaskClicked(tarefa)
+        }
+
+        // Evento que identifica a mudança de estado do Switch
+        holder.swtAndamento.setOnCheckedChangeListener { compoudButton, estado ->
+            tarefa.status = estado
+            viewModel.updateTarefa(tarefa)
+
+        }
     }
 
     // Conta quantos itens existem na lista
