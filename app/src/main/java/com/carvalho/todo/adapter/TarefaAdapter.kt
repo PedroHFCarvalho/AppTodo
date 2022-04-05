@@ -3,6 +3,8 @@ package com.carvalho.todo.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -41,12 +43,22 @@ class TarefaAdapter(
             taskItemClickListener.onTaskClicked(tarefa)
         }
 
+        // Evento de Click no Botao Deletar
+        holder.btnDeletar.setOnClickListener {
+            viewModel.deleteTarefa(
+                tarefa.id
+            )
+
+        }
+
         // Evento que identifica a mudança de estado do Switch
         holder.swtAndamento.setOnCheckedChangeListener { compoudButton, estado ->
             tarefa.status = estado
             viewModel.updateTarefa(tarefa)
 
         }
+
+
     }
 
     // Conta quantos itens existem na lista
@@ -63,6 +75,7 @@ class TarefaAdapter(
         val txtData = view.findViewById<TextView>(R.id.txtData)
         val swtAndamento = view.findViewById<Switch>(R.id.swtAndamento)
         val txtCategoria = view.findViewById<TextView>(R.id.txtCategoria)
+        val btnDeletar = view.findViewById<ImageButton>(R.id.btnDelete)
 
     }
 

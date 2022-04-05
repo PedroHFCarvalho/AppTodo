@@ -24,6 +24,9 @@ class Repository {
     suspend fun updateTarefa(tarefa: Tarefa): Response<Tarefa>{
         return RetrofitInstance.api.updateTarefa(tarefa)
     }
-
+    // Método que acessa a API através do RetrofitInstance e chama o DELETE da ApiService
+    suspend fun deleteTarefa(id: Long): Response<Tarefa>{
+        return RetrofitInstance.api.deleteTarefa(id)
+    }
 
 }

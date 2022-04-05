@@ -4,10 +4,7 @@ package com.carvalho.todo.api
 import com.carvalho.todo.model.Categoria
 import com.carvalho.todo.model.Tarefa
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -26,5 +23,11 @@ interface ApiService {
     //Método PUT para tarefas resgatado da API Online
     @PUT("tarefa")
     suspend fun updateTarefa(@Body tarefa: Tarefa): Response<Tarefa>
+
+    //Método DELETE para tarefas resgatado da API Online
+    @DELETE("tarefa/{id}")
+    suspend fun deleteTarefa(
+        @Path("id") valor: Long
+    ): Response<Tarefa>
 
 }

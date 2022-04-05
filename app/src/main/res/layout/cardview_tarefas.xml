@@ -66,10 +66,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/deletar"
+            android:minWidth="48dp"
             android:minHeight="48dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_baseline_clear_24"
-            tools:ignore="ImageContrastCheck" />
+            android:src="@drawable/ic_baseline_clear_24" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

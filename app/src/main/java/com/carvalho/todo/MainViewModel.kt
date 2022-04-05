@@ -56,6 +56,7 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
         }
 
     }
+
     fun listaTarefa() {
         // viewModelScope.lauch executa o bloco do codigo de forma assíncrona
         viewModelScope.launch {
@@ -83,15 +84,28 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
     }
 
     // Método que recebera e mandara os dados para a atualização de tarefa
-    fun updateTarefa(tarefa: Tarefa){
+    fun updateTarefa(tarefa: Tarefa) {
         viewModelScope.launch {
             try {
                 repository.updateTarefa(tarefa)
                 listaTarefa()
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 Log.d("Erro de Atualização", e.message.toString())
             }
         }
     }
+
+    fun deleteTarefa(id: Long) {
+        viewModelScope.launch {
+            try {
+                repository.deleteTarefa(id)
+                listaTarefa()
+            } catch (e: Exception) {
+                Log.d("Erro de Delete", e.message.toString())
+            }
+        }
+
+    }
+
 
 }
